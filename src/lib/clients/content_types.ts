@@ -61,7 +61,7 @@ export interface TypePageFields {
     titre?: EntryFieldTypes.Symbol;
     id?: EntryFieldTypes.Symbol;
     media?: EntryFieldTypes.AssetLink;
-    contenu?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeGammeSkeleton | TypeProduitSkeleton | TypeTextSkeleton>>;
+    contenu?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeGammeSkeleton | TypeProduitSkeleton | TypeTextSkeleton | TypeHeroSkeleton>>;
 }
 
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
