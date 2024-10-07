@@ -61,7 +61,7 @@ export interface TypePageFields {
     titre?: EntryFieldTypes.Symbol;
     id?: EntryFieldTypes.Symbol;
     media?: EntryFieldTypes.AssetLink;
-    contenu?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeGammeSkeleton | TypeProduitSkeleton | TypeTextSkeleton | TypeHeroSkeleton>>;
+    contenu?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeGammeSkeleton | TypeHeroSkeleton | TypeProduitSkeleton | TypeTextSkeleton>>;
 }
 
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
@@ -92,6 +92,7 @@ export function isTypeProduit<Modifiers extends ChainModifiers, Locales extends 
 export interface TypeTextFields {
     titre?: EntryFieldTypes.Symbol;
     id?: EntryFieldTypes.Symbol;
+    sousTitre?: EntryFieldTypes.Symbol;
     corps?: EntryFieldTypes.RichText;
     liens?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeLienDeNavigationSkeleton>>;
     media?: EntryFieldTypes.AssetLink;

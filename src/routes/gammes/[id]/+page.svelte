@@ -9,6 +9,7 @@
   import Produit from '$lib/components/Produit.svelte'
 
   import type { PageData } from './$types'
+  import Badge from '$lib/components/Badge.svelte';
   let { data }: { data: PageData } = $props()
 
   onMount(() => {
@@ -19,6 +20,10 @@
 <section class="flex flex--center flex--middle flex--gapped {data.item.fields.couleur}" id={data.item.fields.id}>
   {#if data.item.fields.titre}
   <h1 class="col col--12of12">Gamme {data.item.fields.titre.toLowerCase()}s</h1>
+  {/if}
+
+  {#if data.item.fields.sousTitre}
+  <Badge titre={data.item.fields.sousTitre} />
   {/if}
 
   <div class="col col--4of12 flex flex--column flex--gapped">
@@ -49,6 +54,7 @@
 
 <style lang="scss">
   section {
+    position: relative;
     padding: $s3 $s1;
     color: $light;
     background-color: $accent;

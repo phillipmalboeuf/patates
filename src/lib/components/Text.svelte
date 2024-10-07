@@ -7,6 +7,7 @@
   import Media from './Media.svelte'
   import Link from './Link.svelte'
   import Flower from './Flower.svelte';
+  import Badge from './Badge.svelte';
   // import Star from './Star.svelte'
 
   let { item, full, small, first }: {
@@ -37,6 +38,10 @@
     <h2 class="h1">{item.fields.titre}</h2>
     {/if}
 
+    {#if item.fields.sousTitre}
+    <Badge titre={item.fields.sousTitre} />
+    {/if}
+
     {#if item.fields.corps}
     <Rich body={item.fields.corps} />
     {/if}
@@ -59,6 +64,7 @@
 
 <style lang="scss">
   section {
+    position: relative;
     text-align: center;
     min-height: 50lvh;
 
