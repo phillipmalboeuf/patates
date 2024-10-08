@@ -23,6 +23,7 @@ export interface TypeHeroFields {
     media?: EntryFieldTypes.AssetLink;
     sousTitre?: EntryFieldTypes.Symbol;
     corps?: EntryFieldTypes.RichText;
+    couleur?: EntryFieldTypes.Symbol<"Dark" | "Light" | "Normal">;
 }
 
 export type TypeHeroSkeleton = EntrySkeletonType<TypeHeroFields, "hero">;
@@ -93,11 +94,14 @@ export interface TypeTextFields {
     titre?: EntryFieldTypes.Symbol;
     id?: EntryFieldTypes.Symbol;
     sousTitre?: EntryFieldTypes.Symbol;
+    badge?: EntryFieldTypes.Symbol;
     corps?: EntryFieldTypes.RichText;
     liens?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeLienDeNavigationSkeleton>>;
     media?: EntryFieldTypes.AssetLink;
     fleure?: EntryFieldTypes.Boolean;
     dark?: EntryFieldTypes.Boolean;
+    flip?: EntryFieldTypes.Boolean;
+    couleur?: EntryFieldTypes.Symbol<"Dark" | "Light" | "Normal">;
 }
 
 export type TypeTextSkeleton = EntrySkeletonType<TypeTextFields, "text">;

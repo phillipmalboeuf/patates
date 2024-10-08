@@ -23,7 +23,7 @@
   // })
 </script>
 
-<section id={item.fields.id}>
+<section class="{item.fields.couleur}" id={item.fields.id}>
   <figure>
     {#if item.fields.media}
     <Media media={item.fields.media} rounded />
@@ -47,10 +47,34 @@
 
 <style lang="scss">
   section {
+    // margin: calc($s3 * -1) calc($s1 * -1) 0;
+    // padding: ($s1);
+
+    &.Dark {
+      color: $light;
+      background-color: $accent-dark;
+    }
+
+    &.Normal {
+      color: $light;
+      background-color: $accent;
+    }
+
+    &.Light {
+      color: $accent;
+      background-color: $accent-light;
+    }
+
     figure {
       position: relative;
       overflow: hidden;
       border-radius: $radius;
+
+      :global(img),
+      :global(video) {
+        max-height: 80lvh;
+        object-fit: cover;
+      }
 
       figcaption {
         position: absolute;
@@ -62,8 +86,41 @@
 
         color: $light;
 
-        :global(*) {
+        h2 {
+          max-width: 66.6%;
+        }
+
+        &:has(h2 + *) :global(*) {
           max-width: 33.3%;
+        }
+
+        :global(p:empty) {
+          display: none;
+        }
+
+        :global(td),
+	      :global(th) {
+          border-top: none;
+          padding: 0;
+          text-transform: uppercase;
+
+          &:last-child {
+            text-align: right;
+          }
+
+          &:not(:last-child):not(:first-child) {
+            text-align: center;
+          }
+        }
+        
+        :global(th) {
+          font-size: $s6;
+          font-family: $heading_font;
+          line-height: 0.8;
+        }
+
+        h6 {
+          margin: 0 auto auto;
         }
       }
 

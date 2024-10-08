@@ -26,7 +26,7 @@
   // })
 </script>
 
-<section class="flex flex--center flex--middle flex--gapped" class:dark={item.fields.dark} id={item.fields.id}>
+<section class="flex flex--center flex--middle flex--gapped {item.fields.couleur}" class:dark={item.fields.dark} class:flip={item.fields.flip} id={item.fields.id}>
   <div class:col--5of12={!!item.fields.media} class:col--6of12={!item.fields.media} class="col flex flex--column flex--gapped">
     {#if item.fields.fleure}
     <figure class="fleure">
@@ -34,12 +34,16 @@
     </figure>
     {/if}
 
-    {#if item.fields.titre}
-    <h2 class="h1">{item.fields.titre}</h2>
+    {#if item.fields.sousTitre}
+    <h6>{item.fields.sousTitre}</h6>
     {/if}
 
-    {#if item.fields.sousTitre}
-    <Badge titre={item.fields.sousTitre} />
+    {#if item.fields.titre}
+    <h2 class:h1={!item.fields.media || item.fields.titre.length < 40}>{item.fields.titre}</h2>
+    {/if}
+
+    {#if item.fields.badge}
+    <Badge titre={item.fields.badge} />
     {/if}
 
     {#if item.fields.corps}
@@ -68,8 +72,29 @@
     text-align: center;
     min-height: 50lvh;
 
+    &.Dark {
+      color: $light;
+      background-color: $accent-dark;
+    }
+
+    &.Normal {
+      color: $light;
+      background-color: $accent;
+    }
+
+    &.Light {
+      color: $accent;
+      background-color: $accent-light;
+    }
+
     &.dark {
       color: $accent-dark;
+    }
+
+    &.flip {
+      figure {
+        order: -1;
+      }
     }
     
     div {

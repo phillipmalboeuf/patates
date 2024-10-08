@@ -47,7 +47,7 @@
 
 	main {
 		min-height: 100lvh;
-		padding: ($s1);
+		// padding: ($s1);
 
 		.-gammes-id & {
 			padding: 0;

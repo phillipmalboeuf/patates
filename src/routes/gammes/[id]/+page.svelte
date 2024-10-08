@@ -7,9 +7,9 @@
   import Rich from '$lib/components/Rich.svelte'
   import Media from '$lib/components/Media.svelte'
   import Produit from '$lib/components/Produit.svelte'
+  import Badge from '$lib/components/Badge.svelte'
 
   import type { PageData } from './$types'
-  import Badge from '$lib/components/Badge.svelte';
   let { data }: { data: PageData } = $props()
 
   onMount(() => {
@@ -27,8 +27,6 @@
   {/if}
 
   <div class="col col--4of12 flex flex--column flex--gapped">
-    
-
     {#if data.item.fields.description}
     <Rich body={data.item.fields.description} />
     {/if}
@@ -71,6 +69,14 @@
     h1,
     div {
       text-align: center;
+    }
+
+    h1 {
+      margin-top: $s3;
+    }
+
+    div {
+      margin-bottom: $s3;
     }
   }
 </style>

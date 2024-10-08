@@ -16,6 +16,8 @@
   let visible = $state(true)
   let scrollY = $state<number>(0)
   let innerWidth = $state<number>(0)
+
+  let scrolled = $derived($page.data.page?.fields.media ? scrollY > innerWidth * 0.2 : true)
 </script>
 
 <svelte:window bind:scrollY bind:innerWidth />
@@ -24,18 +26,18 @@
 <NoScroll />
 {/if} -->
 
-<header class="padded">
-  <a href="/" class="logo" class:scrolled={scrollY > innerWidth * 0.2} onclick={() => visible = false}>
+<header class="padded" style:--background={{ 'Dark': '#723555', 'Light': '#E6B5B9' }[$page.data.item?.fields.couleur] || '#DD3A6C'}>
+  <a href="/" class="logo" class:scrolled onclick={() => visible = false}>
     <Logo />
   </a>
   <!-- <button class:visible class="button--none h1 col col--4of12" onclick={() => visible = true}>Menu</button> -->
-  <nav class:visible class:scrolled={scrollY > innerWidth * 0.2} class="flex flex--center">
+  <nav class:visible class:scrolled class="flex flex--center">
     {#each navigation.fields.liens as link}
     <Link {link} className={`padded${$page.url.pathname.includes(link.fields.destination) ? ' active' : ''}`} />
     {/each}
 
     <span class="padded">
-      FR | EN
+      FR | EN {$page.data.gamme?.fields.couleur}
     </span>
 
     <!-- <button class="button--none" onclick={() => visible = false} aria-label="Fermer">
@@ -44,6 +46,10 @@
   </nav>
 
   {#if $page.data.page?.fields.media}
+  <a href="/">
+    <Logo />
+  </a>
+
   <figure>
     <Media media={$page.data.page?.fields.media} rounded />
 
@@ -58,13 +64,23 @@
 <style lang="scss">
   header {
     color: $light;
-    background-color: $accent;
-    min-height: 50lvh;
+    background-color: var(--background, $accent);
+    // min-height: 50lvh;
 
     padding: $s1;
 
     .logo {
-      display: block;
+      width: calc($s1 * 10);
+      position: fixed;
+      top: $s0;
+      z-index: 10;
+      transform: translateX(-120%);
+      transition: transform 666ms;
+      will-change: transform;
+      
+      &.scrolled {
+        transform: translateX(0%);
+      }
     }
 
     // > button {

@@ -34,6 +34,8 @@
 
 <style lang="scss">
   section {
-    margin: $s1 0;
+    :global(> section) {
+      padding: $s1;
+    }
   }
 </style>
