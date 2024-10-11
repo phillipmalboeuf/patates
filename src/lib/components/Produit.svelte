@@ -65,6 +65,7 @@
     min-height: 50lvh;
     align-items: stretch;
     padding: $s1;
+    color: $accent;
     background-color: $light;
     border-radius: $s1;
     

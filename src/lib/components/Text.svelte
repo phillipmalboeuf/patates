@@ -26,7 +26,7 @@
   // })
 </script>
 
-<section class="flex flex--center flex--middle flex--gapped {item.fields.couleur}" class:dark={item.fields.dark} class:flip={item.fields.flip} id={item.fields.id}>
+<section class="flex flex--center flex--middle flex--gapped {item.fields.couleur}" class:dark={item.fields.dark} class:flip={item.fields.flip} class:badge={item.fields.badge} id={item.fields.id}>
   <div class:col--5of12={!!item.fields.media} class:col--6of12={!item.fields.media} class="col flex flex--column flex--gapped">
     {#if item.fields.fleure}
     <figure class="fleure">
@@ -89,6 +89,10 @@
 
     &.dark {
       color: $accent-dark;
+    }
+
+    &.badge {
+      margin-top: $s5;
     }
 
     &.flip {

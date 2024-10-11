@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { isTypeGamme, isTypeText } from '$lib/clients/content_types'
+  import { isTypeGamme, isTypeProduit, isTypeSeparateur, isTypeText } from '$lib/clients/content_types'
   
   import Text from '$lib/components/Text.svelte'
   import Gamme from '$lib/components/Gamme.svelte'
@@ -8,7 +8,8 @@
   import Media from '$lib/components/Media.svelte'
   import Produit from '$lib/components/Produit.svelte'
   import Badge from '$lib/components/Badge.svelte'
-
+  import Separateur from '$lib/components/Separateur.svelte'
+  
   import type { PageData } from './$types'
   let { data }: { data: PageData } = $props()
 
@@ -41,7 +42,13 @@
   <ol class="list--nostyle flex flex--column flex--gapped">
     {#each data.item.fields.produits as item}
     <li>
-      <Produit {item} />
+      {#if isTypeProduit(item)}
+        <Produit {item} />
+      {:else if isTypeSeparateur(item)}
+        <Separateur {item} />
+      {:else if isTypeText(item)}
+        <Text {item} />
+      {/if}
     </li>
     {/each}
   </ol>

@@ -7,7 +7,7 @@ export interface TypeGammeFields {
     description?: EntryFieldTypes.RichText;
     couleur?: EntryFieldTypes.Symbol<"Dark" | "Light" | "Normal">;
     media?: EntryFieldTypes.AssetLink;
-    produits?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeProduitSkeleton>>;
+    produits?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeProduitSkeleton | TypeSeparateurSkeleton | TypeTextSkeleton>>;
 }
 
 export type TypeGammeSkeleton = EntrySkeletonType<TypeGammeFields, "gamme">;
@@ -62,7 +62,7 @@ export interface TypePageFields {
     titre?: EntryFieldTypes.Symbol;
     id?: EntryFieldTypes.Symbol;
     media?: EntryFieldTypes.AssetLink;
-    contenu?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeGammeSkeleton | TypeHeroSkeleton | TypeProduitSkeleton | TypeTextSkeleton>>;
+    contenu?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeGammeSkeleton | TypeHeroSkeleton | TypeProduitSkeleton | TypeSeparateurSkeleton | TypeTextSkeleton>>;
 }
 
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
@@ -88,6 +88,18 @@ export type TypeProduit<Modifiers extends ChainModifiers, Locales extends Locale
 
 export function isTypeProduit<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypeProduit<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'produit'
+}
+
+export interface TypeSeparateurFields {
+    id?: EntryFieldTypes.Symbol;
+    media?: EntryFieldTypes.AssetLink;
+}
+
+export type TypeSeparateurSkeleton = EntrySkeletonType<TypeSeparateurFields, "separateur">;
+export type TypeSeparateur<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeSeparateurSkeleton, Modifiers, Locales>;
+
+export function isTypeSeparateur<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypeSeparateur<Modifiers, Locales> {
+    return entry.sys.contentType.sys.id === 'separateur'
 }
 
 export interface TypeTextFields {
