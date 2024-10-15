@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { ParaglideJS } from '@inlang/paraglide-sveltekit'
+	import { i18n } from '$lib/i18n'
+
 	import '../styles/styles.scss'
 
 	// import Dialog from '$lib/components/Dialog.svelte'
@@ -22,6 +25,7 @@
 	{/if}
 </svelte:head>
 
+<ParaglideJS {i18n}>
 <div class="{$page.route.id?.replaceAll('/', '-').replaceAll('[', '').replaceAll(']', '')} {$page.url.pathname.replaceAll('/', '-')}">
 	<!-- <Dialog /> -->
 
@@ -40,6 +44,7 @@
 		work={data.navigations['work']}
 		disclaimers={data.navigations['disclaimers']} /> -->
 </div>
+</ParaglideJS>
 
 <style lang="scss">
 	div {

@@ -6,6 +6,7 @@
   import Link from './Link.svelte'
   import Logo from './Logo.svelte'
   import Media from './Media.svelte';
+  import Locales from './Locales.svelte';
   // import NoScroll from './NoScroll.svelte'
 
   let { navigation }: {
@@ -37,7 +38,7 @@
     {/each}
 
     <span class="padded">
-      FR | EN {$page.data.gamme?.fields.couleur}
+      <Locales />
     </span>
 
     <!-- <button class="button--none" onclick={() => visible = false} aria-label="Fermer">
@@ -118,7 +119,7 @@
       //   right: $s0;
       // }
 
-      :global(a),
+      :global(> a),
       span {
         color: $accent;
         
