@@ -102,7 +102,7 @@
           }
         }
 
-        &:has(h2 + *:not(:empty)) :global(*) {
+        &:has(h2 + *) :global(*) {
           max-width: 33.3%;
 
           @media (max-width: $mobile) {
