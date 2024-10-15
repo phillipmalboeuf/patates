@@ -74,6 +74,10 @@
       :global(video) {
         max-height: 80lvh;
         object-fit: cover;
+
+        @media (max-width: $mobile) {
+          min-height: 80lvh;
+        }
       }
 
       figcaption {
@@ -84,18 +88,46 @@
         height: 100%;
         padding: $s3;
 
+        @media (max-width: $mobile) {
+          padding: $s1;
+        }
+
         color: $light;
 
         h2 {
           max-width: 66.6%;
+
+          @media (max-width: $mobile) {
+            max-width: 100%;
+          }
         }
 
-        &:has(h2 + *) :global(*) {
+        &:has(h2 + *:not(:empty)) :global(*) {
           max-width: 33.3%;
+
+          @media (max-width: $mobile) {
+            max-width: 100%;
+          }
         }
 
         :global(p:empty) {
           display: none;
+        }
+
+        :global(tbody) {
+          @media (max-width: $mobile) {
+            display: flex;
+            gap: $s1;
+          }
+        }
+        
+        :global(tr) {
+          @media (max-width: $mobile) {
+            display: flex;
+            gap: $s0;
+            flex-direction: column;
+            justify-content: space-between;
+          }
         }
 
         :global(td),
@@ -104,12 +136,18 @@
           padding: 0;
           text-transform: uppercase;
 
-          &:last-child {
-            text-align: right;
+          @media (min-width: $mobile) {
+            &:last-child {
+              text-align: right;
+            }
+
+            &:not(:last-child):not(:first-child) {
+              text-align: center;
+            }
           }
 
-          &:not(:last-child):not(:first-child) {
-            text-align: center;
+          @media (max-width: $mobile) {
+            display: flex;
           }
         }
         
@@ -117,6 +155,16 @@
           font-size: $s6;
           font-family: $heading_font;
           line-height: 0.8;
+
+          @media (max-width: $mobile) {
+            font-size: $s5;
+          }
+        }
+
+        :global(td) {
+          @media (max-width: $mobile) {
+            padding: $s0 0;
+          }
         }
 
         h6 {

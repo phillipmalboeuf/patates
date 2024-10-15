@@ -27,7 +27,7 @@
 </script>
 
 <section class="flex flex--center flex--middle flex--gapped {item.fields.couleur}" class:dark={item.fields.dark} class:flip={item.fields.flip} class:badge={item.fields.badge} id={item.fields.id}>
-  <div class:col--5of12={!!item.fields.media} class:col--6of12={!item.fields.media} class="col flex flex--column flex--gapped">
+  <div class:col--5of12={!!item.fields.media} class:col--6of12={!item.fields.media} class="col col--mobile--12of12 flex flex--column flex--gapped">
     {#if item.fields.fleure}
     <figure class="fleure">
       <Flower />
@@ -60,7 +60,7 @@
   </div>
 
   {#if item.fields.media}
-  <figure class="col col--6of12">
+  <figure class="col col--6of12 col--mobile--12of12">
     <Media media={item.fields.media} rounded />
   </figure>
   {/if}
@@ -93,6 +93,11 @@
 
     &.badge {
       margin-top: $s5;
+
+      @media (max-width: $mobile) {
+        margin-top: $s4;
+        margin-bottom: $s4;
+      }
     }
 
     &.flip {

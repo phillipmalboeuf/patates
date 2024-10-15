@@ -24,7 +24,7 @@
 
 <section class="gamme">
   <article class="flex flex--center flex--gapped {item.fields.couleur}" id={item.fields.id}>
-    <div class="col col--5of12 flex flex--column flex--gapped">
+    <div class="col col--5of12 col--mobile--12of12 flex flex--column flex--gapped">
       <h6>Gamme</h6>
       {#if item.fields.titre}
       <h2 class="h1">{item.fields.titre}</h2>
@@ -47,7 +47,7 @@
     </div>
 
     {#if active?.fields.media}
-    <figure class="col col--7of12">
+    <figure class="col col--7of12 col--mobile--12of12">
       <Media media={active?.fields.media} rounded />
     </figure>
     {/if}
@@ -83,9 +83,13 @@
       }
     }
     
-    div {
+    > div {
       // align-items: center;
       // margin: 0 auto;
+
+      @media (max-width: $mobile) {
+        order: 99;
+      }
     }
 
     

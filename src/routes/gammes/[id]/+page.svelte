@@ -27,14 +27,14 @@
   <Badge titre={data.item.fields.sousTitre} />
   {/if}
 
-  <div class="col col--4of12 flex flex--column flex--gapped">
+  <div class="col col--4of12 col--mobile--12of12 flex flex--column flex--gapped">
     {#if data.item.fields.description}
     <Rich body={data.item.fields.description} />
     {/if}
   </div>
 
   {#if data.item.fields.media}
-  <figure class="col col--6of12">
+  <figure class="col col--6of12 col--mobile--12of12">
     <Media media={data.item.fields.media} rounded />
   </figure>
   {/if}
@@ -63,6 +63,12 @@
     padding: $s3 $s1;
     color: $light;
     background-color: $accent;
+
+    @media (max-width: $mobile) {
+      :global(.badge) {
+        display: none;
+      }
+    }
 
     &.Dark {
       background-color: $accent-dark;

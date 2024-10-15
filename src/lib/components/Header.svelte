@@ -1,12 +1,15 @@
 <script lang="ts">
   import type { TypeNavigationSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
+  
   import { page } from '$app/stores'
+  import { fly } from 'svelte/transition'
 
   import Link from './Link.svelte'
   import Logo from './Logo.svelte'
-  import Media from './Media.svelte';
-  import Locales from './Locales.svelte';
+  import Media from './Media.svelte'
+  import Locales from './Locales.svelte'
+  
   // import NoScroll from './NoScroll.svelte'
 
   let { navigation }: {
@@ -14,7 +17,7 @@
     // work: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
   } = $props()
 
-  let visible = $state(true)
+  let visible = $state(false)
   let scrollY = $state<number>(0)
   let innerWidth = $state<number>(0)
 
@@ -28,33 +31,45 @@
 {/if} -->
 
 <header class="padded" style:--background={{ 'Dark': '#723555', 'Light': '#E6B5B9' }[$page.data.item?.fields.couleur] || '#DD3A6C'}>
-  <a href="/" class="logo" class:scrolled onclick={() => visible = false}>
+  <a href="/" class="logo" class:visible class:scrolled onclick={() => visible = false} style:--scrolled={((innerWidth * 0.2) - scrollY) / (innerWidth * 0.2)}>
     <Logo />
   </a>
   <!-- <button class:visible class="button--none h1 col col--4of12" onclick={() => visible = true}>Menu</button> -->
-  <nav class:visible class:scrolled class="flex flex--center">
+  <nav class:visible class:scrolled class="main-nav flex flex--center">
     {#each navigation.fields.liens as link}
-    <Link {link} className={`padded${$page.url.pathname.includes(link.fields.destination) ? ' active' : ''}`} />
+    <Link {link} className={`${$page.url.pathname.includes(link.fields.destination) ? ' active' : ''}`} />
     {/each}
 
-    <span class="padded">
+    <span class="locales">
       <Locales />
     </span>
 
-    <!-- <button class="button--none" onclick={() => visible = false} aria-label="Fermer">
-      <svg width="30" height="30" viewBox="0 0 30 30"><line x1="1.06066" y1="1.0995" x2="28.0607" y2="28.0995" stroke="currentColor" stroke-width="3"/><line x1="28.0607" y1="1.06066" x2="1.06066" y2="28.0607" stroke="currentColor" stroke-width="3"/></svg>
-    </button> -->
+    <button class="button--none" onclick={() => visible = !visible}>{visible ? 'Fermer' : 'Menu'}</button>
   </nav>
 
+  {#if visible}
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <nav class="padded sub-nav flex flex--column flex--gapped" onclick={() => visible = false} transition:fly={{ y: '-100%', duration: 666, opacity: 1 }}>
+      {#each navigation.fields.liens as link}
+      <Link {link} className={`h3 ${$page.url.pathname.includes(link.fields.destination) ? ' active' : ''}`} />
+      {/each}
+
+      <span class="locales">
+        <Locales />
+      </span>
+    </nav>
+  {/if}
+
   {#if $page.data.page?.fields.media}
-  <a href="/">
+  <a class="big-logo" href="/">
     <Logo />
   </a>
 
   <figure>
     <Media media={$page.data.page?.fields.media} rounded />
 
-    <figcaption class="flex flex--spaced">
+    <figcaption class="flex flex--gapped flex--spaced">
       <h6>{$page.data.page?.fields.media.fields.title}</h6>
       <h6>{$page.data.page?.fields.media.fields.description}</h6>
     </figcaption>
@@ -71,19 +86,26 @@
     padding: $s1;
 
     .logo {
-      width: calc($s1 * 10);
+      width: calc((100% * var(--scrolled)) + ($s1 * 5));
+      max-width: calc(100% - ($s1 * 2));
+      min-width: calc($s1 * 10);
       position: fixed;
       top: $s0;
-      z-index: 10;
-      transform: translateX(-120%);
-      transition: transform 666ms;
-      will-change: transform;
+      z-index: 19;
+      // transform: translateX(-120%);
+      // transition: transform 666ms, width 666ms;
+      // will-change: transform;
       
-      &.scrolled {
-        transform: translateX(0%);
+      &.scrolled,
+      &.visible {
+        width: calc($s1 * 10);
+        // transform: translateX(0%);
       }
     }
 
+    .big-logo {
+      visibility: hidden;
+    }
     // > button {
     //   justify-content: flex-start;
     //   transition: opacity 666ms;
@@ -93,7 +115,7 @@
     //   }
     // }
 
-    nav {
+    .main-nav {
       position: absolute;
       z-index: 20;
       top: 20vw;
@@ -119,9 +141,32 @@
       //   right: $s0;
       // }
 
+      @media (max-width: $mobile) {
+        position: fixed;
+        top: 0;
+        left: auto;
+        right: $s-1;
+        transform: none;
+        border-radius: $s3;
+
+        transform: translateY(-150%);
+        transition: transform 333ms;
+        will-change: transform;
+        // opacity: 0;
+        // transition: opacity 666ms;
+
+        &.scrolled,
+        &.visible {
+          transform: translateX(0%);
+          // opacity: 1;
+        }
+      }
+
       :global(> a),
-      span {
+      span,
+      button {
         color: $accent;
+        border: none;
         
         padding: $s-1 $s0;
         letter-spacing: 0.05em;
@@ -137,18 +182,34 @@
         // }
       }
 
+      button {
+        @media (min-width: $mobile) {
+          display: none;
+        }
+      }
+
+      :global(> a),
+      span {
+        @media (max-width: $mobile) {
+          display: none;
+        }
+      }
+      
+
       :global(.active) {
         background-color: $light !important;
       }
 
       &:global(:has(.active)) {
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        background-color: $muted;
+        @media (min-width: $mobile) {
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          background-color: $muted;
 
-        :global(a),
-        span {
-          border-radius: $s1;
+          :global(a),
+          span {
+            border-radius: $s1;
+          }
         }
       }
 
@@ -162,9 +223,36 @@
       }
     }
 
+    .sub-nav {
+      position: fixed;
+      z-index: 18;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: $light;
+      background-color: $accent;
+
+      padding-top: calc($s1 * 8);
+      padding-bottom: $s2;
+      .locales {
+        margin-top: auto;
+      }
+    }
+
     figure {
       position: relative;
       margin-top: $s1;
+
+      :global(img),
+      :global(video) {
+        max-height: 80lvh;
+        object-fit: cover;
+
+        @media (max-width: $mobile) {
+          min-height: 80lvh;
+        }
+      }
 
       figcaption {
         position: absolute;
@@ -172,6 +260,10 @@
         left: 0;
         width: 100%;
         padding: $s1;
+
+        @media (max-width: $mobile) {
+          text-align: center;
+        }
       }
     }
   }

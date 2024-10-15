@@ -7,7 +7,7 @@
   } = $props()
 </script>
 
-<aside>
+<aside class="badge">
   <h5>{titre}</h5>
 </aside>
 
@@ -31,5 +31,14 @@
     border-radius: 50%;
 
     transform: rotate(-15deg);
+
+    @media (max-width: $mobile) {
+      width: calc($s0 * 10);
+      height: calc($s0 * 10);
+
+      top: auto;
+      bottom: calc($s2 * -1);
+      right: calc($s2 * 1);
+    }
   }
 </style>

@@ -22,7 +22,7 @@
 </script>
 
 <section class="flex flex--center flex--gapped" id={item.fields.id}>
-  <div class="col col--6of12 flex flex--column flex--gapped">
+  <div class="col col--6of12 col--mobile--12of12 flex flex--column flex--gapped">
     <h6>{item.fields.sousTitre}</h6>
     {#if item.fields.titre}
     <h2>{item.fields.titre}</h2>
@@ -54,7 +54,7 @@
   </div>
 
   {#if item.fields.media}
-  <figure class="col col--6of12">
+  <figure class="col col--6of12 col--mobile--12of12">
     <Media media={item.fields.media} rounded />
   </figure>
   {/if}
@@ -76,6 +76,10 @@
 
       figure {
         margin: auto 0;
+      }
+
+      @media (max-width: $mobile) {
+        order: 99;
       }
     }
   }
