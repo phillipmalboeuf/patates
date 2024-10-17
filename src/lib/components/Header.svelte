@@ -70,8 +70,10 @@
     <Media media={$page.data.page?.fields.media} rounded />
 
     <figcaption class="flex flex--gapped flex--spaced">
-      <h6>{$page.data.page?.fields.media.fields.title}</h6>
-      <h6>{$page.data.page?.fields.media.fields.description}</h6>
+      <h6>{@html $page.data.page?.fields.media.fields.title?.replace('\\n', '<br />')}</h6>
+      {#if $page.data.page?.fields.media.fields.description}
+      <h6>{@html $page.data.page?.fields.media.fields.description?.replace('\\n', '<br />')}</h6>
+      {/if}
     </figcaption>
   </figure>
   {/if}
@@ -271,8 +273,21 @@
         width: 100%;
         padding: $s1;
 
+        h6 {
+          font-size: $s1;
+          
+          @media (min-width: $mobile) {
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+
         @media (max-width: $mobile) {
-          text-align: center;
+          h6 {
+            width: 100%;
+            text-align: center;
+          }
         }
       }
     }
