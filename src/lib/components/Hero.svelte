@@ -88,11 +88,11 @@
         height: 100%;
         padding: $s3;
 
+        color: $light;
+
         @media (max-width: $mobile) {
           padding: $s1;
         }
-
-        color: $light;
 
         h2 {
           max-width: 66.6%;
@@ -184,7 +184,7 @@
         width: 100%;
         height: 100%;
 
-        background: linear-gradient(0turn, fade-out($dark, 0.5), transparent, transparent);
+        background: linear-gradient(0turn, rgba($dark, 0.5), transparent, transparent);
       }
     }
   }

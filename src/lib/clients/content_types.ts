@@ -93,6 +93,7 @@ export function isTypeProduit<Modifiers extends ChainModifiers, Locales extends 
 export interface TypeSeparateurFields {
     id?: EntryFieldTypes.Symbol;
     media?: EntryFieldTypes.AssetLink;
+    slides?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
 }
 
 export type TypeSeparateurSkeleton = EntrySkeletonType<TypeSeparateurFields, "separateur">;
