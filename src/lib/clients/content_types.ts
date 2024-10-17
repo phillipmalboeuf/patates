@@ -24,6 +24,7 @@ export interface TypeHeroFields {
     sousTitre?: EntryFieldTypes.Symbol;
     corps?: EntryFieldTypes.RichText;
     couleur?: EntryFieldTypes.Symbol<"Dark" | "Light" | "Normal">;
+    full?: EntryFieldTypes.Boolean;
 }
 
 export type TypeHeroSkeleton = EntrySkeletonType<TypeHeroFields, "hero">;

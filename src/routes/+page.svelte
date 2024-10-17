@@ -22,7 +22,7 @@
   {#if isTypeText(item)}
   <Text {item} />
   {:else if isTypeHero(item)}
-  <Hero {item} />
+  <Hero {item} first={i === 0} />
   {:else if isTypeGamme(item)}
   <Gamme {item} />
   {:else if isTypeProduit(item)}
@@ -39,11 +39,20 @@
   section {
     :global(> section) {
       padding: $s1;
+
+      @media (max-width: $mobile) {
+        padding: $s0;
+      }
     }
 
     :global(> section.gamme) {
       padding: 0 $s1;
       margin: $s1 0;
+
+      @media (max-width: $mobile) {
+        padding: 0 $s0;
+        margin: $s0 0;
+      }
     }
   }
 </style>

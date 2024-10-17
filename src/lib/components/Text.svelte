@@ -70,7 +70,7 @@
   section {
     position: relative;
     text-align: center;
-    min-height: 50lvh;
+    // min-height: 50lvh;
 
     &.Dark {
       color: $light;
@@ -108,7 +108,11 @@
     
     div {
       align-items: center;
-      margin: 0 auto;
+      margin: $s4 auto;
+
+      h2 {
+        margin-bottom: $s-1;
+      }
     }
 
     .fleure {

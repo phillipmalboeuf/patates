@@ -85,6 +85,10 @@
 
     padding: $s1;
 
+    @media (max-width: $mobile) {
+      padding: $s-1;
+    }
+
     .logo {
       width: calc((100% * var(--scrolled)) + ($s1 * 5));
       max-width: calc(100% - ($s1 * 2));
@@ -95,6 +99,12 @@
       // transform: translateX(-120%);
       // transition: transform 666ms, width 666ms;
       // will-change: transform;
+
+      @media (max-width: $mobile) {
+        width: calc((100% * var(--scrolled)) + ($s-1 * 5));
+        max-width: calc(100% - ($s-1 * 2));
+        min-width: calc($s-1 * 10);
+      }
       
       &.scrolled,
       &.visible {

@@ -62,6 +62,10 @@
     overflow: hidden;
     padding: $s1;
 
+    @media (max-width: $mobile) {
+      padding: $s0 $s-1;
+    }
+
     .logo,
     .aliments {
       position: relative;

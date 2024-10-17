@@ -63,6 +63,10 @@
     background-color: $accent;
     border-radius: $s1;
 
+    @media (max-width: $mobile) {
+      padding: $s-1;
+    }
+
     .active {
       background-color: $light;
       color: $accent;
@@ -95,6 +99,7 @@
     
 
     nav {
+      margin-top: $s-1;
       &:first-of-type {
         margin-top: auto;
       }

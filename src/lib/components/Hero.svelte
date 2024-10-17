@@ -23,10 +23,10 @@
   // })
 </script>
 
-<section class="{item.fields.couleur}" id={item.fields.id}>
+<section class:full={item.fields.full} class:first class="{item.fields.couleur}" id={item.fields.id}>
   <figure>
     {#if item.fields.media}
-    <Media media={item.fields.media} rounded />
+    <Media media={item.fields.media} rounded={!item.fields.full} />
     {/if}
 
     <figcaption class="flex flex--bottom flex--gapped">
@@ -65,6 +65,24 @@
       background-color: $accent-light;
     }
 
+    &.full {
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+
+      figure {
+        border-radius: 0;
+      }
+    }
+
+    &.first {
+      padding-top: $s2;
+
+      @media (max-width: $mobile) {
+        padding-top: $s4;
+      }
+    }
+
     figure {
       position: relative;
       overflow: hidden;
@@ -91,7 +109,7 @@
         color: $light;
 
         @media (max-width: $mobile) {
-          padding: $s1;
+          padding: $s1 $s-1;
         }
 
         h2 {
@@ -124,7 +142,7 @@
         :global(tr) {
           @media (max-width: $mobile) {
             display: flex;
-            gap: $s0;
+            // gap: $s0;
             flex-direction: column;
             justify-content: space-between;
           }
