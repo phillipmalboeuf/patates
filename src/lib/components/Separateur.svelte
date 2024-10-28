@@ -59,6 +59,7 @@
     width: 100vw;
     padding: $s2 0;
     margin: 0 calc($s1 * -1);
+    overflow: hidden;
 
     &.no-padding {
       padding: 0;
