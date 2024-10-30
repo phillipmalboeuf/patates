@@ -25,7 +25,7 @@
   {/if}
 
   {#if data.item.fields.sousTitre}
-  <Badge titre={data.item.fields.sousTitre} />
+  <Badge titre={data.item.fields.sousTitre} tight />
   {/if}
 
   <div class="col col--4of12 col--mobile--12of12 flex flex--column flex--gapped">
@@ -92,11 +92,11 @@
     }
 
     h1 {
-      margin-top: $s3;
+      margin-top: $s5;
     }
 
     div {
-      margin-bottom: $s3;
+      margin-bottom: $s5;
     }
   }
 </style>

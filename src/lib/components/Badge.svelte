@@ -1,13 +1,11 @@
 <script lang="ts">
-  let { titre }: {
+  let { titre, tight }: {
     titre: string
-    first?: boolean
-    full?: boolean
-    small?: boolean
+    tight?: boolean
   } = $props()
 </script>
 
-<aside class="badge">
+<aside class="badge" class:tight>
   <h5>{titre}</h5>
 </aside>
 
@@ -31,6 +29,13 @@
     border-radius: 50%;
 
     animation: rotate 3s ease-in-out infinite;
+    
+    @media (min-width: $tablet) {
+      &.tight {
+        top: calc($s2 * 1);
+        right: calc($s5 * 1);
+      }
+    }
 
     @media (max-width: $mobile) {
       width: calc($s0 * 10);
