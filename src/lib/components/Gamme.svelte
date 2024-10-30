@@ -25,7 +25,7 @@
 
 <section class="gamme">
   <article class="flex flex--center flex--gapped {item.fields.couleur}" id={item.fields.id}>
-    <div class="col col--5of12 col--mobile--12of12 flex flex--column flex--gapped">
+    <div class="col col--5of12 col--tablet--6of12 col--mobile--12of12 flex flex--column flex--gapped">
       <h6>{#if languageTag() === 'fr'}Gamme{/if}{#if languageTag() === 'en'}Range{/if}</h6>
       {#if item.fields.titre}
       <h2 class="h1">{item.fields.titre}</h2>
@@ -48,7 +48,7 @@
     </div>
 
     {#if active?.fields.media}
-    <figure class="col col--7of12 col--mobile--12of12">
+    <figure class="col col--7of12 col--tablet--6of12 col--mobile--12of12">
       {#if active?.fields.background}
       <Media media={active?.fields.background} rounded ar={4/5} />
       {/if}
@@ -115,13 +115,23 @@
 
     nav {
       margin-top: $s-1;
-      &:first-of-type {
+      
+      &.produits {
         margin-top: auto;
         
         a {
           text-transform: uppercase;
           font-size: calc($s1);
           letter-spacing: 0.05em;
+        }
+
+        @media (max-width: $mobile) {
+          margin: $s-1 0;
+          gap: $s-2;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          // margin-right: calc($s0 * -1);
+          width: calc(100% + ($s-1 * 1));
         }
       }
     }

@@ -81,7 +81,7 @@ h1,
 	// 	letter-spacing: -0.01em;
 	// }
 
-	@media (max-width: $mobile) {
+	@media (max-width: $tablet) {
     font-size: $s4;
   }
 }
@@ -589,6 +589,22 @@ strong,
         $adjust: calc(var(--gap) / #{math.div($number_of_columns, $i)});
         width: calc(#{$width} - var(--gap) + #{$adjust});
        }
+
+			 @media (max-width: $tablet) {
+				&.col--tablet--#{$i}of#{$number_of_columns} {
+					$width:  math.div(100%, $number_of_columns) * $i;
+					$adjust: calc(var(--gap) / #{math.div($number_of_columns, $i)});
+					width: calc(#{$width} - var(--gap) + #{$adjust}) !important;
+
+					&:empty {
+						display: none;
+					}
+
+					// & + br {
+					// 	display: none;
+					// }
+				}
+			}
 
 			@media (max-width: $mobile) {
 				&.col--mobile--#{$i}of#{$number_of_columns} {
