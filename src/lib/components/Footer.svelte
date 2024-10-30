@@ -92,6 +92,12 @@
     form {
       position: relative;
       z-index: 1;
+
+      button {
+        font-family: $heading_font;
+        font-size: calc($s0 + 2px);
+        letter-spacing: 0.05em;
+      }
     }
 
     nav {
