@@ -79,6 +79,7 @@ export interface TypeProduitFields {
     sousTitre?: EntryFieldTypes.Symbol;
     description?: EntryFieldTypes.RichText;
     media?: EntryFieldTypes.AssetLink;
+    background?: EntryFieldTypes.AssetLink;
     illustration?: EntryFieldTypes.AssetLink;
     gauche?: EntryFieldTypes.Text;
     droite?: EntryFieldTypes.Text;

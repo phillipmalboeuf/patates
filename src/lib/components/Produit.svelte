@@ -25,7 +25,7 @@
   <div class="col col--6of12 col--mobile--12of12 flex flex--column flex--gapped">
     <h6>{item.fields.sousTitre}</h6>
     {#if item.fields.titre}
-    <h2>{item.fields.titre}</h2>
+    <h2 class="h1">{item.fields.titre}</h2>
     {/if}
 
     {#if item.fields.illustration}
@@ -57,7 +57,10 @@
 
   {#if item.fields.media}
   <figure class="col col--6of12 col--mobile--12of12">
-    <Media media={item.fields.media} rounded />
+    {#if item.fields.background}
+    <Media media={item.fields.background} ar={5/4} />
+    {/if}
+    <Media media={item.fields.media} rounded={!item.fields.background} />
   </figure>
   {/if}
 </section>
@@ -70,10 +73,20 @@
     color: $accent;
     background-color: $light;
     border-radius: $s1;
+    overflow: hidden;
     
     > div {
       align-items: center;
       text-align: center;
+      padding: $s2 0 $s0;
+
+      @media (max-width: $mobile) {
+        padding-bottom: 0;
+      }
+
+      h2 {
+        text-transform: uppercase;
+      }
 
       main {
         margin: 0 auto;
@@ -82,10 +95,52 @@
 
       figure {
         margin: auto 0;
+
+        @media (max-width: $mobile) {
+          margin: $s2 0;
+        }
+      }
+
+      aside {
+        margin-top: $s2;
+
+        h6 {
+          &:first-child {
+            text-align: left;
+          }
+
+          &:last-child {
+            text-align: right;
+          }
+        }
       }
 
       @media (max-width: $mobile) {
         order: 99;
+      }
+    }
+
+    > figure {
+      position: relative;
+
+      @media (min-width: $mobile) {
+        margin: calc($s1 * -1) calc($s1 * -2) calc($s1 * -1) calc($s1 * 1);
+      }
+
+      @media (max-width: $mobile) {
+        &.col.col--mobile--12of12 {
+          margin: calc($s1 * -1) calc($s1 * -2) 0;
+          width: calc(100% + $s1 * 2) !important;
+        }
+      }
+
+      :global(> * + *) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        transform: translate(-50%, -50%);
+        // height: 100%;
       }
     }
   }

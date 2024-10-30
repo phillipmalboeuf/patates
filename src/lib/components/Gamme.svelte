@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isTypeProduit, type TypeGammeSkeleton, type TypeTextSkeleton } from '$lib/clients/content_types'
+  import { isTypeProduit, type TypeGammeSkeleton, type TypeProduitSkeleton, type TypeTextSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
   import { onMount, type Snippet } from 'svelte'
   
@@ -13,7 +13,7 @@
   } = $props()
 
   // let desktop = $state(false)
-  let active = $state(item.fields.produits?.length ? item.fields.produits[0] : undefined)
+  let active = $state(item.fields.produits?.length ? item.fields.produits[0] as Entry<TypeProduitSkeleton,"WITHOUT_UNRESOLVABLE_LINKS"> : undefined)
 
   // onMount(() => {
   //   if (window.innerWidth > 888) {
@@ -48,7 +48,10 @@
 
     {#if active?.fields.media}
     <figure class="col col--7of12 col--mobile--12of12">
-      <Media media={active?.fields.media} rounded />
+      {#if active?.fields.background}
+      <Media media={active?.fields.background} rounded ar={4/5} />
+      {/if}
+      <Media media={active?.fields.media} rounded={!active?.fields.background} />
     </figure>
     {/if}
   </article>
@@ -96,7 +99,18 @@
       }
     }
 
-    
+    > figure {
+      position: relative;
+
+      :global(> * + *) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        transform: translate(-50%, -50%);
+        // height: 100%;
+      }
+    }
 
     nav {
       margin-top: $s-1;
