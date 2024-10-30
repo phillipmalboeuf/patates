@@ -31,7 +31,7 @@
 {/if} -->
 
 <header class="padded" style:--background={{ 'Dark': '#723555', 'Light': '#E6B5B9' }[$page.data.item?.fields.couleur] || '#DD3A6C'}>
-  <a href="/" class="logo" class:visible class:scrolled onclick={() => visible = false} style:--scrolled={((innerWidth * 0.2) - scrollY) / (innerWidth * 0.2)}>
+  <a href="/" class="logo" class:visible class:scrolled onclick={() => visible = false} style:--scrolled={Math.max(0, ((innerWidth * 0.2) - scrollY) / (innerWidth * 0.2))}>
     <Logo />
   </a>
   <!-- <button class:visible class="button--none h1 col col--4of12" onclick={() => visible = true}>Menu</button> -->
@@ -97,6 +97,7 @@
       min-width: calc($s1 * 10);
       position: fixed;
       top: $s0;
+      left: calc(($s1 * (1 - var(--scrolled))) + $s1);
       z-index: 19;
       // transform: translateX(-120%);
       // transition: transform 666ms, width 666ms;
@@ -111,6 +112,7 @@
       &.scrolled,
       &.visible {
         width: calc($s1 * 10);
+        left: calc($s1 + $s1);
         // transform: translateX(0%);
       }
     }
