@@ -169,7 +169,7 @@
           }
         }
         
-        :global(th) {
+        :global(th p) {
           font-size: $s6;
           font-family: $heading_font;
           line-height: 0.8;

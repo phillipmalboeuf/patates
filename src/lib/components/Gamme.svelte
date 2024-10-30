@@ -6,6 +6,7 @@
   import Rich from './Rich.svelte'
   import Media from './Media.svelte'
   import Link from './Link.svelte'
+  import { languageTag } from '$lib/paraglide/runtime';
   // import Star from './Star.svelte'
 
   let { item }: {
@@ -25,7 +26,7 @@
 <section class="gamme">
   <article class="flex flex--center flex--gapped {item.fields.couleur}" id={item.fields.id}>
     <div class="col col--5of12 col--mobile--12of12 flex flex--column flex--gapped">
-      <h6>Gamme</h6>
+      <h6>{#if languageTag() === 'fr'}Gamme{/if}{#if languageTag() === 'en'}Range{/if}</h6>
       {#if item.fields.titre}
       <h2 class="h1">{item.fields.titre}</h2>
       {/if}
@@ -42,7 +43,7 @@
       {/if}
 
       <nav class="flex flex--gapped">
-        <a href={`/gammes/${item.fields.id}`} class="button button--strong">Découvrir la gamme</a>
+        <a href={`/gammes/${item.fields.id}`} class="button button--strong">{languageTag() === 'fr' ? 'Découvrir la gamme' : 'Discover this range'}</a>
       </nav>
     </div>
 

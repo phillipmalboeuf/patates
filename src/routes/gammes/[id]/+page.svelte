@@ -11,6 +11,7 @@
   import Separateur from '$lib/components/Separateur.svelte'
   
   import type { PageData } from './$types'
+  import { languageTag } from '$lib/paraglide/runtime';
   let { data }: { data: PageData } = $props()
 
   onMount(() => {
@@ -20,7 +21,7 @@
 
 <section class="flex flex--center flex--middle flex--gapped {data.item.fields.couleur}" id={data.item.fields.id}>
   {#if data.item.fields.titre}
-  <h1 class="col col--12of12">Gamme {data.item.fields.titre.toLowerCase()}s</h1>
+  <h1 class="col col--12of12">{#if languageTag() === 'fr'}Gamme {data.item.fields.titre.toLowerCase()}s{/if}{#if languageTag() === 'en'}{data.item.fields.titre} range{/if}</h1>
   {/if}
 
   {#if data.item.fields.sousTitre}
