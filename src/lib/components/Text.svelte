@@ -116,6 +116,10 @@
       }
     }
 
+    nav {
+      margin-top: $s0;
+    }
+
     .fleure {
       width: $s4;
     }
