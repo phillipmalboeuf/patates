@@ -107,6 +107,7 @@
         width: calc((100% * var(--scrolled)) + ($s-1 * 5));
         max-width: calc(100% - ($s-1 * 2));
         min-width: calc($s-1 * 10);
+        left: calc(($s-1 * (1 - var(--scrolled))) + $s-1);
       }
       
       &.scrolled,
@@ -114,6 +115,10 @@
         width: calc($s1 * 10);
         left: calc($s1 + $s1);
         // transform: translateX(0%);
+
+        @media (max-width: $mobile) {
+          left: calc($s-1 + $s-1);
+        }
       }
     }
 
@@ -141,6 +146,7 @@
       background-color: $light;
       border-radius: $s1;
       overflow: hidden;
+      flex-wrap: nowrap;
 
       // height: 100lvh;
       // width: 33vw;
@@ -154,6 +160,10 @@
       //   top: $s0;
       //   right: $s0;
       // }
+
+      @media (min-width: $mobile) {
+        text-align: center;
+      }
 
       @media (max-width: $mobile) {
         position: fixed;
@@ -249,6 +259,7 @@
 
       padding-top: calc($s1 * 8);
       padding-bottom: $s2;
+
       .locales {
         margin-top: auto;
       }

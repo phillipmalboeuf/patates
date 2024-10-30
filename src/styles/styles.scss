@@ -31,9 +31,9 @@ body {
 	color: $accent;
 	background-color: $light;
 
-	@media (max-width: $mobile) {
-    font-size: $s-1;
-  }
+	// @media (max-width: $mobile) {
+  //   font-size: $s-1;
+  // }
 
 	.background {
 		position: fixed;

@@ -35,7 +35,7 @@
       {/if}
 
       {#if item.fields.titre}
-      <h2 class="h1">{item.fields.titre}</h2>
+      <h2 class="h1">{@html item.fields.titre}</h2>
       {/if}
 
       {#if item.fields.corps}
