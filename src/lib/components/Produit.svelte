@@ -35,7 +35,9 @@
     {/if}
 
     {#if item.fields.description}
+    <main class="flex flex--column flex--gapped">
     <Rich body={item.fields.description} />
+    </main>
     {/if}
 
     <aside class="flex flex--gapped flex--spaced">
@@ -72,7 +74,11 @@
     > div {
       align-items: center;
       text-align: center;
-      // margin: 0 auto;
+
+      main {
+        margin: 0 auto;
+        max-width: 64ch;
+      }
 
       figure {
         margin: auto 0;

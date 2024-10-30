@@ -216,7 +216,7 @@
         @media (min-width: $mobile) {
           backdrop-filter: blur(6px);
           -webkit-backdrop-filter: blur(6px);
-          background-color: $muted;
+          background: linear-gradient(0deg, rgba(230, 181, 185, 0.2), rgba(230, 181, 185, 0.2)), rgba(255, 255, 255, 0.7);
 
           :global(a),
           span {

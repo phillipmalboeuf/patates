@@ -30,7 +30,7 @@
       <h2 class="h1">{item.fields.titre}</h2>
       {/if}
 
-      <nav class="flex flex--gapped">
+      <nav class="flex flex--gapped produits">
         {#each item.fields.produits.filter(isTypeProduit) as produit}
         <a href={`/gammes/${item.fields.id}#${produit.fields.id}`} class="button" class:active={active?.fields.id === produit.fields.id}
           onmouseenter={() => active = produit}>{produit.fields.titre}</a>
@@ -102,10 +102,12 @@
       margin-top: $s-1;
       &:first-of-type {
         margin-top: auto;
-      }
-
-      a {
-        text-transform: uppercase;
+        
+        a {
+          text-transform: uppercase;
+          font-size: calc($s1);
+          letter-spacing: 0.05em;
+        }
       }
     }
   }

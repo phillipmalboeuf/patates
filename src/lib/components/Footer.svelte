@@ -30,7 +30,7 @@
   </nav>
 
   <form action="" class="col col--5of12 col--mobile--12of12 flex flex--gapped">
-    <h4>{languageTag() === 'fr' ? "Vous avez des questions?" : "Do you have any questions?"}</h4>
+    <h4 class="col col--12of12">{languageTag() === 'fr' ? "Vous avez des questions?" : "Do you have any questions?"}</h4>
     <input class="col col--6of12" name="nom" placeholder={languageTag() === 'fr' ? "Votre nom" : "Your name"}>
     <input class="col col--6of12" name="email" type="email" placeholder={languageTag() === 'fr' ? "Votre courriel" : "Your email"}>
     <textarea name="message" id="message" placeholder={languageTag() === 'fr' ? "Votre message" : "Your message"}></textarea>
@@ -102,6 +102,7 @@
       :global(.button) {
         padding: 0;
         border: none;
+        font-size: calc($s1 + 2px);
       }
 
       @media (max-width: $mobile) {
@@ -123,7 +124,7 @@
 
       color: $accent-light;
 
-      animation-duration: 15s;
+      animation-duration: 20s;
       animation-timing-function: linear;
       animation-name: rotate;
       animation-iteration-count: infinite;

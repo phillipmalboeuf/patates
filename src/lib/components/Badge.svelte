@@ -30,7 +30,7 @@
     text-align: center;
     border-radius: 50%;
 
-    transform: rotate(-15deg);
+    animation: rotate 3s ease-in-out infinite;
 
     @media (max-width: $mobile) {
       width: calc($s0 * 10);
@@ -39,6 +39,18 @@
       top: auto;
       bottom: calc($s2 * -1);
       right: calc($s2 * 1);
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(-15deg);
+    }
+    50% {
+      transform: rotate(-10deg); 
+    }
+    100% {
+      transform: rotate(-15deg);
     }
   }
 </style>

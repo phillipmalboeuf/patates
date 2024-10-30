@@ -57,7 +57,7 @@
 <style lang="scss">
   figure {
     width: 100vw;
-    padding: $s2 0;
+    padding: $s4 0;
     margin: 0 calc($s1 * -1);
     overflow: hidden;
 

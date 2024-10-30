@@ -79,6 +79,12 @@
       background-color: $accent-light;
     }
 
+    ol {
+      li {
+        width: 100%;
+      }
+    }
+
     h1,
     div {
       text-align: center;

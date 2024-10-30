@@ -109,6 +109,7 @@
     div {
       align-items: center;
       margin: $s4 auto;
+      max-width: 64ch;
 
       h2 {
         margin-bottom: $s-1;
