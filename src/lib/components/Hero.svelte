@@ -6,6 +6,7 @@
   import Rich from './Rich.svelte'
   import Media from './Media.svelte'
   import Link from './Link.svelte'
+  import Parallax from './Parallax.svelte'
 
   let { item, full, small, first }: {
     item: Entry<TypeHeroSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -13,20 +14,17 @@
     full?: boolean
     small?: boolean
   } = $props()
-
-  // let desktop = $state(false)
-
-  // onMount(() => {
-  //   if (window.innerWidth > 888) {
-  //     desktop = true
-  //   }
-  // })
 </script>
 
-<section class:full={item.fields.full} class:first class="{item.fields.couleur}" id={item.fields.id}>
+<section
+  class:full={item.fields.full} 
+  class:first 
+  class="{item.fields.couleur}" 
+  id={item.fields.id}
+>
   <figure>
     {#if item.fields.media}
-    <Media media={item.fields.media} rounded={!item.fields.full} />
+    <Parallax media={item.fields.media} full={!item.fields.full} />
     {/if}
 
     <figcaption class="flex flex--bottom flex--gapped">
@@ -87,6 +85,11 @@
       position: relative;
       overflow: hidden;
       border-radius: $radius;
+
+      .media-wrapper {
+        transform: scale(1.1);
+        will-change: transform;
+      }
 
       :global(img),
       :global(video) {

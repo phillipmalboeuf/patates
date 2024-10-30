@@ -9,6 +9,7 @@
   import Logo from './Logo.svelte'
   import Media from './Media.svelte'
   import Locales from './Locales.svelte'
+  import Parallax from './Parallax.svelte'
   
   // import NoScroll from './NoScroll.svelte'
 
@@ -67,7 +68,9 @@
   </a>
 
   <figure>
-    <Media media={$page.data.page?.fields.media} rounded />
+    {#if $page.data.page?.fields.media}
+    <Parallax media={$page.data.page?.fields.media} />
+    {/if}
 
     <figcaption class="flex flex--gapped flex--spaced">
       <h6>{@html $page.data.page?.fields.media.fields.title?.replace('\\n', '<br />')}</h6>
@@ -268,6 +271,8 @@
     figure {
       position: relative;
       margin-top: $s1;
+      border-radius: $radius;
+      overflow: hidden;
 
       :global(img),
       :global(video) {
