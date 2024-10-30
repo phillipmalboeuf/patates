@@ -104,9 +104,9 @@
       // will-change: transform;
 
       @media (max-width: $mobile) {
-        width: calc((100% * var(--scrolled)) + ($s-1 * 5));
-        max-width: calc(100% - ($s-1 * 2));
-        min-width: calc($s-1 * 10);
+        // width: calc((100% * var(--scrolled)) + ($s1 * 5));
+        // max-width: calc(100% - ($s1 * 2));
+        // min-width: calc($s1 * 10);
         left: calc(($s-1 * (1 - var(--scrolled))) + $s-1);
       }
       
