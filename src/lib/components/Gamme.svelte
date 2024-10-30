@@ -68,7 +68,7 @@
     border-radius: $s1;
 
     @media (max-width: $mobile) {
-      padding: $s-1;
+      padding: $s0;
     }
 
     .active {
@@ -131,7 +131,7 @@
           flex-wrap: nowrap;
           overflow-x: auto;
           // margin-right: calc($s0 * -1);
-          width: calc(100% + ($s-1 * 1));
+          width: calc(100% + ($s0 * 1));
         }
       }
     }
