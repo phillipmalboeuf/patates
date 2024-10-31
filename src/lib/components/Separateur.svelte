@@ -63,7 +63,11 @@
 
     &.no-padding {
       padding: 0;
-      margin: 0 calc($s1 * -1) -1.5px;
+      margin: 0 0 -1.5px;
+
+      :global(img) {
+        width: calc(100vw + 2px);
+      }
     }
 
     &.slides {
