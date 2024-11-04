@@ -34,11 +34,11 @@
     {/if}
   </div>
 
-  {#if data.item.fields.media}
+  <!-- {#if data.item.fields.media}
   <figure class="col col--6of12 col--mobile--12of12">
     <Media media={data.item.fields.media} rounded />
   </figure>
-  {/if}
+  {/if} -->
 
   <ol class="list--nostyle flex flex--column flex--gapped">
     {#each data.item.fields.produits as item}

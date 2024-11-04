@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TypeNavigationSkeleton } from '$lib/clients/content_types'
+  import type { TypeGammeSkeleton, TypeNavigationSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
   
   import { page } from '$app/stores'
@@ -10,6 +10,8 @@
   import Media from './Media.svelte'
   import Locales from './Locales.svelte'
   import Parallax from './Parallax.svelte'
+  import { languageTag } from '$lib/paraglide/runtime';
+  import Pastille from './Pastille.svelte';
   
   // import NoScroll from './NoScroll.svelte'
 
@@ -52,8 +54,14 @@
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <nav class="padded sub-nav flex flex--column flex--gapped" onclick={() => visible = false} transition:fly={{ y: '-100%', duration: 666, opacity: 1 }}>
+      <h6>{#if languageTag() === 'fr'}Nos produits{/if}{#if languageTag() === 'en'}Our products{/if}</h6>
       {#each navigation.fields.liens as link}
+      {#if link.fields.destination.startsWith('/gammes/')}
+      {@const gamme = $page.data.gammes[link.fields.destination.split('/')[2]] as Entry<TypeGammeSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">}
+      <Pastille {gamme} />
+      {:else}
       <Link {link} className={`h3 ${$page.url.pathname.includes(link.fields.destination) ? ' active' : ''}`} />
+      {/if}
       {/each}
 
       <span class="locales">
@@ -265,6 +273,24 @@
 
       .locales {
         margin-top: auto;
+      }
+
+      h6 {
+        font-size: $s0;
+      }
+
+      :global(.pastille) {
+        max-width: 100%;
+        margin: 0;
+        margin-bottom: $s3;
+      }
+
+      :global(.pastille + .pastille) {
+        margin-top: calc($s3 * -1);
+      }
+
+      :global(.pastille.Normal) {
+        background-color: $accent-dark;
       }
     }
 

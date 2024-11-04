@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TypeTextSkeleton } from '$lib/clients/content_types'
+  import type { TypeGammeSkeleton, TypeTextSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
   import { onMount, type Snippet } from 'svelte'
   
@@ -8,7 +8,10 @@
   import Link from './Link.svelte'
   import Flower from './Flower.svelte';
   import Badge from './Badge.svelte';
-  // import Star from './Star.svelte'
+  import Pastille from './Pastille.svelte';
+
+  import { page } from '$app/stores';
+  import { languageTag } from '$lib/paraglide/runtime';
 
   let { item, full, small, first }: {
     item: Entry<TypeTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -53,7 +56,12 @@
     {#if item.fields.liens?.length}
     <nav class="flex flex--gapped flex--center">
       {#each item.fields.liens as link}
+      {#if link.fields.destination.startsWith('/gammes/')}
+      {@const gamme = $page.data.gammes[link.fields.destination.split('/')[2]] as Entry<TypeGammeSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">}
+      <Pastille {gamme} />
+      {:else}
       <Link {link} className="button button--strong" />
+      {/if}
       {/each}
     </nav>
     {/if}

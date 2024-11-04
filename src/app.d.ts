@@ -14,6 +14,7 @@ declare global {
 }
 		interface PageData {
 			page?: Entry<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+			gammes: {[id: string]: Entry<TypeGammeSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">}
 		}
 		// interface PageState {}
 		// interface Platform {}

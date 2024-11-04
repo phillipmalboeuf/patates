@@ -21,7 +21,7 @@
     if (!mediaWrapper) return
     const rect = mediaWrapper.getBoundingClientRect()
     const scrollProgress = rect.top / innerHeight
-    mediaWrapper.style.transform = `scale(${1.05}) translateY(${scrollProgress * -100}px)`
+    mediaWrapper.style.transform = `scale(${1.05}) translateY(${scrollProgress * -150}px)`
   }
 
   onMount(() => {
