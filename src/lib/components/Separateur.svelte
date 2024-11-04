@@ -10,11 +10,9 @@
   import Media from './Media.svelte'
   import Link from './Link.svelte'
 
-  let { item, full, small, first }: {
+  let { item, fast }: {
     item: Entry<TypeSeparateurSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
-    first?: boolean
-    full?: boolean
-    small?: boolean
+    fast?: boolean
   } = $props()
 
   const options: EmblaOptionsType = {
@@ -38,7 +36,7 @@
 
 {#if item.fields.slides && item.fields.slides.length > 0}
   <figure class="slides" id={item.fields.id} class:no-padding={item.fields.id === "vagues"}>
-    <div use:emblaCarouselSvelte={{ options: { ...options, duration: 10 * item.fields.slides[0].fields.file.details.image.width }, plugins }}>
+    <div use:emblaCarouselSvelte={{ options: { ...options, duration: (fast ? 5 : 10) * item.fields.slides[0].fields.file.details.image.width }, plugins }}>
       <div class="embla__container">
         {#each [...item.fields.slides, ...item.fields.slides] as slide}
           <div class="embla__slide">

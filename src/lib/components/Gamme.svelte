@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isTypeProduit, type TypeGammeSkeleton, type TypeProduitSkeleton, type TypeTextSkeleton } from '$lib/clients/content_types'
+  import { isTypeProduit, type TypeGammeSkeleton, type TypeProduitSkeleton, type TypeSeparateurSkeleton, type TypeTextSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
   import { onMount, type Snippet } from 'svelte'
   
@@ -7,6 +7,8 @@
   import Media from './Media.svelte'
   import Link from './Link.svelte'
   import { languageTag } from '$lib/paraglide/runtime';
+  import Separateur from './Separateur.svelte';
+  import { fly, slide } from 'svelte/transition';
   // import Star from './Star.svelte'
 
   let { item }: {
@@ -15,6 +17,7 @@
 
   // let desktop = $state(false)
   let active = $state(item.fields.produits?.length ? item.fields.produits[0] as Entry<TypeProduitSkeleton,"WITHOUT_UNRESOLVABLE_LINKS"> : undefined)
+  let hover: Entry<TypeProduitSkeleton,"WITHOUT_UNRESOLVABLE_LINKS"> = $state(undefined)
 
   // onMount(() => {
   //   if (window.innerWidth > 888) {
@@ -34,7 +37,11 @@
       <nav class="flex flex--gapped produits">
         {#each item.fields.produits.filter(isTypeProduit) as produit}
         <a href={`/gammes/${item.fields.id}#${produit.fields.id}`} class="button" class:active={active?.fields.id === produit.fields.id}
-          onmouseenter={() => active = produit}>{produit.fields.titre}</a>
+          onmouseenter={() => {
+            active = produit
+            hover = produit
+          }}
+          onmouseleave={() => hover = undefined}>{produit.fields.titre}</a>
         {/each}
       </nav>
 
@@ -48,12 +55,19 @@
     </div>
 
     {#if active?.fields.media}
-    <figure class="col col--7of12 col--tablet--6of12 col--mobile--12of12">
+    <a href={`/gammes/${item.fields.id}`} class="col col--7of12 col--tablet--6of12 col--mobile--12of12" onpointerenter={() => hover = active} onpointerleave={() => hover = undefined}>
+    <figure>
       {#if active?.fields.background}
       <Media media={active?.fields.background} rounded ar={4/5} />
       {/if}
+      {#if hover}
+      <div class="hover">
+        <Separateur fast item={{ fields: { slides: [hover.fields.illustration, hover.fields.illustration, hover.fields.illustration] } } as Entry<TypeSeparateurSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">} />
+      </div>
+      {/if}
       <Media media={active?.fields.media} rounded={!active?.fields.background} />
     </figure>
+    </a>
     {/if}
   </article>
 </section>
@@ -100,8 +114,9 @@
       }
     }
 
-    > figure {
+    > a figure {
       position: relative;
+      overflow: hidden;
 
       :global(> * + *) {
         position: absolute;
@@ -110,6 +125,36 @@
         width: 50%;
         transform: translate(-50%, -50%);
         // height: 100%;
+      }
+
+      .hover {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        transform: translate(0, -50%);
+        // height: 100%;
+
+        :global(.slides) {
+          width: 100%;
+          margin: 0;
+        }
+
+        :global(.embla__slide) {
+          flex: 0 0 100%;
+          max-width: none;
+
+          :global(img),
+          :global(video) {
+            height: auto;
+            width: 100%;
+          }
+        }
+
+        :global(.embla__slide:first-child) {
+          // opacity: 0.5;
+          visibility: hidden;
+        }
       }
     }
 
