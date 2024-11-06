@@ -12,6 +12,7 @@
   import Parallax from './Parallax.svelte'
   import { languageTag } from '$lib/paraglide/runtime';
   import Pastille from './Pastille.svelte';
+  import Scrollin from './Scrollin.svelte';
   
   // import NoScroll from './NoScroll.svelte'
 
@@ -81,9 +82,9 @@
     {/if}
 
     <figcaption class="flex flex--gapped flex--spaced">
-      <h6>{@html $page.data.page?.fields.media.fields.title?.replace('\\n', '<br />')}</h6>
+      <h6><Scrollin>{@html $page.data.page?.fields.media.fields.title?.replace('\\n', '<br />')}</Scrollin></h6>
       {#if $page.data.page?.fields.media.fields.description}
-      <h6>{@html $page.data.page?.fields.media.fields.description?.replace('\\n', '<br />')}</h6>
+      <h6><Scrollin delay={250}>{@html $page.data.page?.fields.media.fields.description?.replace('\\n', '<br />')}</Scrollin></h6>
       {/if}
     </figcaption>
   </figure>

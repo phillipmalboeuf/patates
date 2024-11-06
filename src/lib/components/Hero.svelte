@@ -7,6 +7,7 @@
   import Media from './Media.svelte'
   import Link from './Link.svelte'
   import Parallax from './Parallax.svelte'
+  import Scrollin from './Scrollin.svelte';
 
   let { item, full, small, first }: {
     item: Entry<TypeHeroSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -27,17 +28,17 @@
     <Parallax media={item.fields.media} full={!item.fields.full} />
     {/if}
 
-    <figcaption class="flex flex--bottom flex--gapped">
+    <figcaption class="flex flex--bottom flex--gapped" class:titre={item.fields.titre}>
       {#if item.fields.sousTitre}
-      <h6>{item.fields.sousTitre}</h6>
+      <h6><Scrollin>{item.fields.sousTitre}</Scrollin></h6>
       {/if}
 
       {#if item.fields.titre}
-      <h2 class="h1">{@html item.fields.titre}</h2>
+      <h2 class="h1"><Scrollin>{@html item.fields.titre}</Scrollin></h2>
       {/if}
 
       {#if item.fields.corps}
-      <Rich body={item.fields.corps} />
+      <Rich body={item.fields.corps} scrollin />
       {/if}
     </figcaption>
   </figure>
@@ -123,7 +124,7 @@
           }
         }
 
-        &:has(h2 + *) :global(*) {
+        &:not(.titre) :global(> *:not(table)) {
           max-width: 33.3%;
 
           @media (max-width: $mobile) {
@@ -131,7 +132,8 @@
           }
         }
 
-        :global(p:empty) {
+        :global(p:empty),
+        :global(p:has(span:empty)) {
           display: none;
         }
 
