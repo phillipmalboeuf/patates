@@ -80,6 +80,8 @@
     color: $light;
     background-color: $accent;
     border-radius: $s1;
+    max-width: 1666px;
+    margin: 0 auto;
 
     @media (max-width: $mobile) {
       padding: $s0;

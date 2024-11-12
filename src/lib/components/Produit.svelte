@@ -74,6 +74,8 @@
     background-color: $light;
     border-radius: $s1;
     overflow: hidden;
+    max-width: 1666px;
+    margin: 0 auto;
     
     > div {
       align-items: center;
