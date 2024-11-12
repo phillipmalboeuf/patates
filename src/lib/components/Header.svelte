@@ -159,6 +159,7 @@
       border-radius: $s1;
       overflow: hidden;
       flex-wrap: nowrap;
+      // transition: background-color 333ms;
 
       // height: 100lvh;
       // width: 33vw;
@@ -226,6 +227,7 @@
 
       :global(> a),
       span {
+        // transition: background-color 333ms;
         @media (max-width: $mobile) {
           display: none;
         }
@@ -236,7 +238,13 @@
         background-color: $light !important;
       }
 
-      &:global(:has(.active)) {
+      :global(a:hover),
+      :global(span:hover) {
+        background-color: rgba($light, 0.8) !important;
+      }
+
+      &:global(:has(.active)),
+      &:global(:has(a:hover)) {
         @media (min-width: $mobile) {
           backdrop-filter: blur(6px);
           -webkit-backdrop-filter: blur(6px);
