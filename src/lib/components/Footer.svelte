@@ -2,13 +2,15 @@
   import type { TypeNavigationSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
   import { page } from '$app/stores'
+  import { enhance, applyAction } from '$app/forms'
   import { languageTag } from '$lib/paraglide/runtime'
 
   import Link from './Link.svelte'
   import Logo from './Logo.svelte'
   import Flower from './Flower.svelte'
-  import Aliments from './Aliments.svelte';
-  import Locales from './Locales.svelte';
+  import Aliments from './Aliments.svelte'
+  import Locales from './Locales.svelte'
+  import { goto } from '$app/navigation';
 
   let { navigation }: {
     navigation: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -29,13 +31,26 @@
     </span>
   </nav>
 
-  <form action="" class="col col--5of12 col--mobile--12of12 flex flex--gapped">
+  <form action="/?/contact" method="post" use:enhance={({ formElement, formData, action, cancel }) => {
+		return async ({ result }) => {
+			// `result` is an `ActionResult` object
+			if (result.type === 'redirect') {
+				goto(result.location);
+			} else {
+				await applyAction(result);
+			}
+		};
+	}} class="col col--5of12 col--mobile--12of12 flex flex--gapped">
+    {#if $page.form}
+      <p>{languageTag() === 'fr' ? `Merci ${$page.form.nom} pour votre message, on vous répondra dès que possible!` : `Thank you ${$page.form.nom} for your message, we will respond as soon as possible!`}</p>
+    {:else}
     <h4 class="col col--12of12">{languageTag() === 'fr' ? "Vous avez des questions?" : "Do you have any questions?"}</h4>
     <input class="col col--6of12" name="nom" placeholder={languageTag() === 'fr' ? "Votre nom" : "Your name"}>
     <input class="col col--6of12" name="email" type="email" placeholder={languageTag() === 'fr' ? "Votre courriel" : "Your email"}>
     <textarea name="message" id="message" placeholder={languageTag() === 'fr' ? "Votre message" : "Your message"}></textarea>
     
     <button class="button--light" type="submit">{languageTag() === 'fr' ? "Soumettre" : "Submit"}</button>
+    {/if}
   </form>
   
   <a href="https://www.alimentsduquebec.com" target="_blank" rel="external" class="aliments">
