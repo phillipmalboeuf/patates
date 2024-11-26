@@ -41,7 +41,7 @@
             active = produit
             hover = produit
           }}
-          onmouseleave={() => hover = undefined}>{produit.fields.titre}</a>
+          onmouseleave={() => hover = undefined}>{@html produit.fields.titre.replaceAll(' ', '&nbsp;')}</a>
         {/each}
       </nav>
 
@@ -170,6 +170,7 @@
           text-transform: uppercase;
           font-size: calc($s1);
           letter-spacing: 0.05em;
+          margin-bottom: 1px;
         }
 
         @media (max-width: $mobile) {
