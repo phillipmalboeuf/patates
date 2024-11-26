@@ -109,11 +109,14 @@
       min-width: calc($s1 * 10);
       position: fixed;
       top: $s0;
-      left: calc(($s1 * (1 - var(--scrolled))) + $s1);
+      left: calc(($s0 * (1 - var(--scrolled))) + $s1);
       z-index: 19;
       // transform: translateX(-120%);
-      // transition: transform 666ms, width 666ms;
+      transition: color 666ms;
       // will-change: transform;
+      
+      padding: $s-1;
+      border-radius: calc($radius * 2);
 
       @media (max-width: $mobile) {
         // width: calc((100% * var(--scrolled)) + ($s1 * 5));
@@ -125,8 +128,10 @@
       &.scrolled,
       &.visible {
         width: calc($s1 * 10);
-        left: calc($s1 + $s1);
+        left: calc($s0 + $s1);
         // transform: translateX(0%);
+        background-color: $light;
+        color: $accent;
 
         @media (max-width: $mobile) {
           left: calc($s-1 + $s-1);
