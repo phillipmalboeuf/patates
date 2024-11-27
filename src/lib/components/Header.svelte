@@ -130,7 +130,9 @@
         width: calc($s1 * 10);
         left: calc($s0 + $s1);
         // transform: translateX(0%);
-        background-color: $light;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        background: linear-gradient(0deg, rgba(230, 181, 185, 0.2), rgba(230, 181, 185, 0.2)), rgba(255, 255, 255, 0.7);
         color: $accent;
 
         @media (max-width: $mobile) {
