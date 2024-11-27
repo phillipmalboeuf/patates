@@ -25,7 +25,7 @@ export const actions = {
 
     await email.sendEmailWithTemplate({
         From: 'phil@phils.computer',
-        To: 'phil@phils.computer',
+        To: 'info@propur.com',
         MessageStream: 'broadcast',
         ReplyTo: data.email as string,
         TemplateAlias: 'base',
