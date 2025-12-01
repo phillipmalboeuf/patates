@@ -21,7 +21,7 @@ export const actions = {
 	contact: async (event) => {
 		const data = Object.fromEntries(await event.request.formData())
 
-    console.log(data)
+    // console.log(data)
 
     await email.sendEmailWithTemplate({
         From: 'phil@phils.computer',
@@ -31,12 +31,18 @@ export const actions = {
         TemplateAlias: 'base',
         TemplateModel: {
           subject: `Commentaire`,
-          body: `${data.message}<br><br>${data.nom} – ${data.email}`,
+          body: `${data.message}<br><br>${data.nom} – ${data.email} ${data.phone}`,
           product_url: "https://mamzells.com",
           product_name: "Mamzells",
           company_name: "Mamzells",
           company_address: ""
-        }
+        },
+        ...(data.fichiers && (data.fichiers as File).size) ? { Attachments: [{
+          Name: (data.fichiers as File).name,
+          ContentID: `cid:${(data.fichiers as File).name}`,
+          Content: Buffer.from((await (data.fichiers as File).arrayBuffer())).toString('base64'),
+          ContentType: (data.fichiers as File).type
+        }] } : {}
       })
 
     return {

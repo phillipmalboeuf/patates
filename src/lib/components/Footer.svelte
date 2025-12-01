@@ -12,6 +12,8 @@
   import Locales from './Locales.svelte'
   import { goto } from '$app/navigation';
 
+  let file = $state(null)
+
   let { navigation }: {
     navigation: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
     // work: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -31,7 +33,7 @@
     </span>
   </nav>
 
-  <form action="/?/contact" method="post" use:enhance={({ formElement, formData, action, cancel }) => {
+  <form action="/?/contact" method="post" enctype="multipart/form-data" use:enhance={({ formElement, formData, action, cancel }) => {
 		return async ({ result }) => {
 			// `result` is an `ActionResult` object
 			if (result.type === 'redirect') {
@@ -47,6 +49,8 @@
     <h4 class="col col--12of12">{languageTag() === 'fr' ? "Vous avez des questions?" : "Do you have any questions?"}</h4>
     <input class="col col--6of12" name="nom" placeholder={languageTag() === 'fr' ? "Votre nom" : "Your name"}>
     <input class="col col--6of12" name="email" type="email" placeholder={languageTag() === 'fr' ? "Votre courriel" : "Your email"}>
+    <input class="col col--6of12" name="phone" type="tel" placeholder={languageTag() === 'fr' ? "Votre # de téléphone" : "Your phone number"}>
+    <input class="col col--6of12" bind:files={file} class:filled={!!file} name="fichiers" type="file" placeholder={languageTag() === 'fr' ? "Fichier en attachement" : "Attachment file"}>
     <textarea name="message" id="message" placeholder={languageTag() === 'fr' ? "Votre message" : "Your message"}></textarea>
     
     <button class="button--light" type="submit">{languageTag() === 'fr' ? "Soumettre" : "Submit"}</button>
@@ -112,6 +116,20 @@
         font-family: $heading_font;
         font-size: calc($s0 + 2px);
         letter-spacing: 0.05em;
+      }
+
+      input[type="file"] {
+        cursor: pointer;
+        
+        &:not(.filled) {
+          &:before {
+            content: attr(placeholder);
+          }
+
+          &::file-selector-button {
+            display: none;
+          }
+        }
       }
     }
 
